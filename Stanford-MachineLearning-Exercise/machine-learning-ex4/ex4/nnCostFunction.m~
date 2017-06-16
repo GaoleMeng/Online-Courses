@@ -68,7 +68,7 @@ aone = sigmoid(Theta1*(X)')
 hidden = [ones(1,m); aone]
 atwo = sigmoid(Theta2*hidden)
 
-onehoty = zeros(num_labels, m);
+onehoty = zeros(, m);
 for i=1:m
    onehoty(y(i),i)=1; 
 end
