@@ -72,8 +72,9 @@ onehoty = zeros(num_labels, m);
 for i=1:m
    onehoty(y(i),i)=1; 
 end
-
-J = sum(sum(1/m*(-onehoty.*log(atwo)-(1-onehoty).*log(1-atwo))));
+tmp1 = Theta1.*Theta1
+tmp2 = Theta2.*Theta2
+J = sum(sum(1/m*(-onehoty.*log(atwo)-(1-onehoty).*log(1-atwo)))) + lambda/(2*m)* (sum(sum(tmp1(:,2:end)))+sum(sum(tmp2(:,2:end))));
 
 
 

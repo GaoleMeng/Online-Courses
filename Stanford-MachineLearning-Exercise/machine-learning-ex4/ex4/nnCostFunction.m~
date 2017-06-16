@@ -68,12 +68,13 @@ aone = sigmoid(Theta1*(X)')
 hidden = [ones(1,m); aone]
 atwo = sigmoid(Theta2*hidden)
 
-onehoty = zeros(, m);
+onehoty = zeros(num_labels, m);
 for i=1:m
    onehoty(y(i),i)=1; 
 end
-
-J = sum(sum(1/m*(-onehoty.*log(atwo)-(1-onehoty).*log(1-atwo))));
+tmp1 = theta1.*theta1
+tmp2 = theta2.*theta2
+J = sum(sum(1/m*(-onehoty.*log(atwo)-(1-onehoty).*log(1-atwo)))) + lambda/(2*m)* ( sum(sum(tmp1(:,2:end)))+sum( sum((theta2.*theta2)(:,2:end))));
 
 
 
