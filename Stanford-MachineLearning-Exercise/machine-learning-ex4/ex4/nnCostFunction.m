@@ -77,7 +77,26 @@ tmp2 = Theta2.*Theta2
 J = sum(sum(1/m*(-onehoty.*log(atwo)-(1-onehoty).*log(1-atwo)))) + lambda/(2*m)* (sum(sum(tmp1(:,2:end)))+sum(sum(tmp2(:,2:end))));
 
 
+for i=1:m
+    a1 = (X(i, :))'
+    z2 = Theta1*a1
+    a2 = sigmoid(z2)
+    a2 = [1 ; a2]
+    z3 = Theta2*a2
+    a3 = sigmoid(z3)
+    delta3 = a3 - onehoty(:, i)
+    dumy = [1; sigmoidGradient(z2)]
+    delta2 = (Theta2)'*delta3.*dumy;
+    delta2 = delta2(2:end)
+    Theta1_grad = Theta1_grad + delta2*(a1)'
+    Theta2_grad = Theta2_grad + delta3*(a2)'
+end
 
+Theta1_grad = Theta1_grad/m + lambda/m*(Theta1);
+Theta2_grad = Theta2_grad/m + lambda/m*(Theta2);
+
+Theta1_grad(:,1) = Theta1_grad(:,1) - lambda/m*(Theta1(:,1))
+Theta2_grad(:,1) = Theta2_grad(:,1) - lambda/m*(Theta2(:,1))
 
 
 
