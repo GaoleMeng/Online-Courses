@@ -42,18 +42,14 @@ Theta_grad = zeros(size(Theta));
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+J = 1/2*sum(sum(((X*Theta'-Y).^2.*R)))
+X_grad = (X*Theta'-Y).*R*Theta;
+Theta_grad = ((X*Theta'-Y).*R)'*X
+J = J + (lambda/2*sum(sum(Theta(:,1:end).*Theta(:,1:end))))+(lambda/2*sum(sum(X(:,1:end).*X(:,1:end))))
+X_grad = (X*Theta'-Y).*R*Theta;
+Theta_grad = ((X*Theta'-Y).*R)'*X
+X_grad = X_grad + lambda*X
+Theta_grad = Theta_grad + lambda*Theta
 
 % =============================================================
 
